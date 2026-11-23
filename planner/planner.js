@@ -6,7 +6,7 @@ function ensureKind(kind){if(!kind)return;const select=$('kind');if(!Array.from(
 $('kind').addEventListener('change',()=>{const colour=defaultColours[$('kind').value];if(colour)$('colour').value=colour});
 $('addKind').onclick=()=>{const name=$('customKind').value.trim();if(!name)return status('Enter a name for the custom marker type.');ensureKind(name);$('kind').value=name;$('colour').value='#ffffff';$('customKind').value='';status('Custom marker type added. Choose its colour and place a marker.')};
 $('colour').value=defaultColours[$('kind').value];
-const MAPS={master:'../ThorpeMarsh 2D.jpg'};
+const MAPS={master:'../ThorpeMarsh 2D.jpg',clean:'../281026_ortho_MonNov23152701242400.jpg'};
 const DEFAULT_MAP=MAPS.master;
 let activeMap='master',loadToken=0;
 function switchMap(choice,force=false){if(!MAPS[choice])return;if(!force&&(markers.length||lines.length||crop)&&!confirm('Switch map? This will clear the current crop, markers and lines. Save your plan first if you need them.')){$('mapChoice').value=activeMap;return}activeMap=choice;imageData=null;crop=null;markers=[];lines=[];selectedIndex=-1;selectedLine=-1;image=null;renderList();renderLines();status('Loading map…');load(MAPS[choice],true)}
